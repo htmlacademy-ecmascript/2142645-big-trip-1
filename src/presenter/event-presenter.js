@@ -68,9 +68,11 @@ export default class EventPresenter {
   }
 
   changeFormToCard() {
-    replace(this.#eventItem, this.#eventEdit);
-    this.#eventMode = Mode.VIEW;
-    window.removeEventListener('keydown', this.#onEventEditEscape);
+    if (this.#eventMode === Mode.EDIT) {
+      replace(this.#eventItem, this.#eventEdit);
+      this.#eventMode = Mode.VIEW;
+      window.removeEventListener('keydown', this.#onEventEditEscape);
+    }
   }
 
   #onEventEditFormSubmit = (updatePoint) => {

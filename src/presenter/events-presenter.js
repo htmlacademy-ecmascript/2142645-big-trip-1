@@ -184,6 +184,7 @@ export default class EventsPresenter {
     this.#eventPresenters.forEach((eventPresenter) => eventPresenter.destroy());
     this.#eventPresenters.clear();
     remove(this.#sortView);
+    remove(this.#eventsListView);
 
     if (resetSort) {
       this.#currentSortType = SortType.DAY;

@@ -1,7 +1,6 @@
-import { render, RenderPosition } from './framework/render.js';
-import TripInfoView from './view/trip-info-view.js';
 import EventsPresenter from './presenter/events-presenter.js';
 import FilterPresenter from './presenter/filter-presenter.js';
+import TripInfoPresenter from './presenter/trip-info-presenter.js';
 import EventsModel from './model/events-model.js';
 import FilterModel from './model/filter-model.js';
 import EventsApiService from './events-api-service.js';
@@ -15,10 +14,11 @@ const eventsApiService = new EventsApiService(END_POINT, AUTHORIZATION);
 
 const eventsModel = new EventsModel({ eventsApiService });
 const filterModel = new FilterModel();
+
 const filterPresenter = new FilterPresenter({ filterContainer: tripControlsFilters, filterModel, eventsModel });
 const eventsPresenter = new EventsPresenter({ eventsContainer: eventsSection, tripMainContainer: tripMain, eventsModel, filterModel });
+const tripInfoPresenter = new TripInfoPresenter({ tripInfoContainer: tripMain, eventsModel });
 
-render(new TripInfoView(), tripMain, RenderPosition.AFTERBEGIN);
-
+tripInfoPresenter.init();
 filterPresenter.init();
 eventsPresenter.init();
